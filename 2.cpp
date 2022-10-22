@@ -33,6 +33,7 @@ void fact(ll n)
 
         if(p * p > n)
             break;
+            
 
         int cnt = 0;
         if(n % p == 0)
