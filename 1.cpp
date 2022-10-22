@@ -100,7 +100,7 @@ int main(void)
     RifatXia();
     fast_io
 
-    cout << "Hello Zia\n";
+    cout << "Hello Rifat\n";
 
     return 0;
 }
