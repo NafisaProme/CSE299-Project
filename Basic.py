@@ -20,8 +20,9 @@ cv2.rectangle(Bill_Gates,(bill_face_location[3], bill_face_location[0]),(bill_fa
 
 # comparison between 2 images
 encodedElon = face_recognition.face_encodings(Elon_Musk)[0]
-# encodedTest = face_recognition.face_encodings(test_Elon_Musk)[0]
 encodedBill = face_recognition.face_encodings(Bill_Gates)[0]
+# encodedTest = face_recognition.face_encodings(test_Elon_Musk)[0]
+
 # print(encodedBill)
 
 # comparison_result = face_recognition.compare_faces([encodedElon],encodedTest)
