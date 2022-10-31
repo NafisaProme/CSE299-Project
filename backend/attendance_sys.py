@@ -5,7 +5,7 @@ import os
 import numpy as np
 
 # get the image list
-PATH = "resources"
+PATH = "backend/resources"
 imgs = []
 image_files = os.listdir(PATH)
 images = []
