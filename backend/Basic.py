@@ -34,8 +34,6 @@ print(comparison_result)
 face_distances = face_recognition.face_distance([encodedElon],encodedTest)
 print(face_distances)
 
-
-
 # display images
 cv2.imshow("Elon Musk", Elon_Musk)
 # cv2.imshow("Jeff Bezos",Jeff_Bezos)
