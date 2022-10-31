@@ -1,8 +1,10 @@
 from sre_constants import SUCCESS
+from wsgiref.handlers import format_date_time
 import cv2
 import face_recognition
 import os
 import numpy as np
+from datetime import datetime
 
 # get the image list
 PATH = "backend/resources"
@@ -18,6 +20,25 @@ for img_file in image_files:
     images.append(img)
     person_name = img_file.split(".")[0]
     persons_names.append(person_name)
+
+# mark attendance
+def mark_attance_list(name):
+    with open("backend/attendance.csv","r+") as f:
+        # get current data inside of the list
+        current_lst = f.readlines()
+        
+        names = []
+
+        for item in current_lst:
+            entry = item.split(",")
+            # get the name from the list
+            names.append(entry[0])
+
+        # show name and time
+        if name not in names:
+            cur_time = datetime.now()
+            formatted_time = cur_time.strftime("%H:%M:%S")
+            f.writelines(f"\n{name},{formatted_time}")
 
 # a function that will encode all of the images
 def faceEncodings(img_list):
@@ -55,6 +76,8 @@ while True:
             cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,0),3)
             # show name beside img box
             cv2.putText(img,name,(x1+8,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,0,0),2)
+            # call the function
+            mark_attance_list(name)
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)

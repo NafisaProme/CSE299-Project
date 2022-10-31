@@ -2,9 +2,9 @@ import cv2
 import face_recognition
 
 # call image
-Elon_Musk = cv2.imread("backend\\resources\Elon_Musk.jpg")
+Elon_Musk = cv2.imread("backend/resources/Elon_Musk.jpg")
 # Jeff_Bezos = cv2.imread("resources/Jeff_Bezos.jpg")
-test_Elon_Musk = cv2.imread("backend\\resources\\Jeff_Bezos.jpg")
+test_Elon_Musk= cv2.imread("backend/resources/test_Elon_Musk.jpg")
 
 # identify the face from thr image
 #(top,right,bottom,left)
