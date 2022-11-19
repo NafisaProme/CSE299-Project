@@ -4,7 +4,7 @@ import face_recognition
 # call image
 Elon_Musk = cv2.imread("backend/resources/Elon_Musk.jpg")
 # Jeff_Bezos = cv2.imread("resources/Jeff_Bezos.jpg")
-test_Elon_Musk= cv2.imread("backend/resources/test_Elon_Musk.jpg")
+test_Elon_Musk= cv2.imread("backend/resources/Jeff_Bezos.jpg")
 
 # identify the face from thr image
 #(top,right,bottom,left)
@@ -37,7 +37,7 @@ print(face_distances)
 # display images
 cv2.imshow("Elon Musk", Elon_Musk)
 # cv2.imshow("Jeff Bezos",Jeff_Bezos)
-cv2.imshow("test_Elon_Musk",test_Elon_Musk)
+cv2.imshow("Jeff Bezos",test_Elon_Musk)
 
 # the image will wait after display
 cv2.waitKey(10000)
