@@ -6,7 +6,25 @@ import * as MediaLibrary from 'expo-media-library';
 import { MaterialIcons } from '@expo/vector-icons';
 import Button from './src/components/Button';
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore, setDoc, doc } from "firebase/firestore";
+
 export default function App() {
+
+	// setting up firebase for the transfer of images 
+	const firebaseConfig = {
+		apiKey: "AIzaSyC6lEwU-QT4toNNEvWs63jsnKSaIIFuvvo",
+		authDomain: "attendancecamera.firebaseapp.com",
+		projectId: "attendancecamera",
+		storageBucket: "attendancecamera.appspot.com",
+		messagingSenderId: "338003251006",
+		appId: "1:338003251006:web:ea222a928384aaa255266f",
+		measurementId: "G-796BC5GJV1"
+	};
+	initializeApp(firebaseConfig);
+
+	const firestore = getFirestore();
+
 	// setting up the camera permissions
 	const [hasCameraPermission, setHasCameraPermission] = useState(null);
 	const [image, setImage] = useState(null);
