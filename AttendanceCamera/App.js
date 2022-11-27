@@ -5,9 +5,12 @@ import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { MaterialIcons } from '@expo/vector-icons';
 import Button from './src/components/Button';
+import { ImagePicker } from 'expo';
+import * as firebase from 'firebase';
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { async } from '@firebase/util';
 
 export default function App() {
 
@@ -74,6 +77,34 @@ export default function App() {
 		}
 	};
 
+	// funtion for sending image to firebase
+	sendImage = async () =>
+	{
+		let result = await ImagePicker.launchCameraAsync();
+
+		if(!result.cancelled)
+		{
+			uploadImage(result.uri, "test_image")
+			.then(() => {
+
+			})
+			.catch((error) => 
+			{
+				
+			})
+		}
+	}
+
+	uploadImage = async (uri) => 
+	{
+		const response = await fetch(uri);
+		const blob = response.blob();
+
+		// reference to the image for uploading 
+		var ref = firebase.storage().ref().child("images/" + imageName);
+		return ref.put(blob);
+	}
+
 	// checking for the camera permissions 
 	if (hasCameraPermission === false) {
 		return <Text>No access to camera</Text>;
@@ -81,6 +112,7 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
+			<Button title="Choose Image" onPress={sendImage}></Button>
 			{!image ? (
 				<Camera
 					style={styles.camera}
