@@ -1,32 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import Constants from 'expo-constants';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { MaterialIcons } from '@expo/vector-icons';
 import Button from './src/components/Button';
 import { ImagePicker } from 'expo';
-import * as firebase from 'firebase';
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { async } from '@firebase/util';
 
 export default function App() {
-
-	// setting up firebase for the transfer of images 
-	const firebaseConfig = {
-		apiKey: "AIzaSyC6lEwU-QT4toNNEvWs63jsnKSaIIFuvvo",
-		authDomain: "attendancecamera.firebaseapp.com",
-		projectId: "attendancecamera",
-		storageBucket: "attendancecamera.appspot.com",
-		messagingSenderId: "338003251006",
-		appId: "1:338003251006:web:ea222a928384aaa255266f",
-		measurementId: "G-796BC5GJV1"
-	};
-	initializeApp(firebaseConfig);
-
-	const firestore = getFirestore();
 
 	// setting up the camera permissions
 	const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -76,34 +65,7 @@ export default function App() {
 			}
 		}
 	};
-
-	// funtion for sending image to firebase
-	sendImage = async () =>
-	{
-		let result = await ImagePicker.launchCameraAsync();
-
-		if(!result.cancelled)
-		{
-			uploadImage(result.uri, "test_image")
-			.then(() => {
-
-			})
-			.catch((error) => 
-			{
-				
-			})
-		}
-	}
-
-	uploadImage = async (uri) => 
-	{
-		const response = await fetch(uri);
-		const blob = response.blob();
-
-		// reference to the image for uploading 
-		var ref = firebase.storage().ref().child("images/" + imageName);
-		return ref.put(blob);
-	}
+	
 
 	// checking for the camera permissions 
 	if (hasCameraPermission === false) {
@@ -112,7 +74,6 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<Button title="Choose Image" onPress={sendImage}></Button>
 			{!image ? (
 				<Camera
 					style={styles.camera}
