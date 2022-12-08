@@ -7,13 +7,15 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Button from './src/components/Button';
 
 import * as ImagePicker from 'expo-image-picker';
-import { firebase } from './Config'
+import { firebase } from './config';
 
 export default function App() {
 
 	// setting up the camera permissions
 	const [hasCameraPermission, setHasCameraPermission] = useState(null);
 	const [image, setImage] = useState(null);
+
+	const [uploading, setUploading] = useState(false);
 
 	// use the back or the front camera 
 	const [type, setType] = useState(Camera.Constants.Type.back);
@@ -52,38 +54,37 @@ export default function App() {
 			try {
 				const asset = await MediaLibrary.createAssetAsync(image);
 				alert("Picture saved successfully 🥳");
-				// setImage(null);
+				setImage(null);
 				console.log('Picture saved successfully');
 			} catch (error) {
 				console.log(error);
 			}
 
-			const source = {uri: image}
-			setImage(source);
+			// const source = {uri: image}
+			// setImage(source);
 
-			uploadImage();
 		}
 	};
 	
-	const uploadImage = async () =>
-	{
-		console.log(image);
-		const response = await fetch(image.uri);
-		const blob = await response.blob();
-		const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
-		var ref = firebase.storage().ref().child(filename).put(blob);
+	// const uploadImage = async () =>
+	// {
+	// 	console.log(image);
+	// 	const response = await fetch(image.uri);
+	// 	const blob = await response.blob();
+	// 	const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
+	// 	var ref = firebase.storage().ref().child(filename).put(blob);
 
-		try {
-			await ref;
-		}
-		catch (error) {
-			console.log(error);
-		}
-		Alert.alert(
-			"Photo Uploaded"
-		);
-		setImage(null);
-	}
+	// 	try {
+	// 		await ref;
+	// 	}
+	// 	catch (error) {
+	// 		console.log(error);
+	// 	}
+	// 	Alert.alert(
+	// 		"Photo Uploaded"
+	// 		);
+	// 	setImage(null);
+	// }
 
 	// checking for the camera permissions 
 	if (hasCameraPermission === false) {
