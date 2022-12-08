@@ -1,19 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, SafeAreaView } from 'react-native';
 import Constants from 'expo-constants';
 import { Camera, CameraType } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { MaterialIcons } from '@expo/vector-icons';
 import Button from './src/components/Button';
-import { ImagePicker } from 'expo';
 
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-
-import { initializeApp } from 'firebase/app';
-import { getFirestore, setDoc, doc } from "firebase/firestore";
-import { async } from '@firebase/util';
+import * as ImagePicker from 'expo-image-picker';
+import { firebase } from './Config'
 
 export default function App() {
 
@@ -58,14 +52,38 @@ export default function App() {
 			try {
 				const asset = await MediaLibrary.createAssetAsync(image);
 				alert("Picture saved successfully 🥳");
-				setImage(null);
+				// setImage(null);
 				console.log('Picture saved successfully');
 			} catch (error) {
 				console.log(error);
 			}
+
+			const source = {uri: image}
+			setImage(source);
+
+			uploadImage();
 		}
 	};
 	
+	const uploadImage = async () =>
+	{
+		console.log(image);
+		const response = await fetch(image.uri);
+		const blob = await response.blob();
+		const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
+		var ref = firebase.storage().ref().child(filename).put(blob);
+
+		try {
+			await ref;
+		}
+		catch (error) {
+			console.log(error);
+		}
+		Alert.alert(
+			"Photo Uploaded"
+		);
+		setImage(null);
+	}
 
 	// checking for the camera permissions 
 	if (hasCameraPermission === false) {

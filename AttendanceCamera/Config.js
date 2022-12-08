@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
-const firebaseConfig = 
+const firebaseConfig =
 {
     apiKey: "AIzaSyC6lEwU-QT4toNNEvWs63jsnKSaIIFuvvo",
     authDomain: "attendancecamera.firebaseapp.com",
@@ -14,9 +14,8 @@ const firebaseConfig =
     measurementId: "G-796BC5GJV1"
 };
 
-if(!firebase.apps.length)
-{
+if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
-export {firebase};
+export { firebase };
