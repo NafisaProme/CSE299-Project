@@ -17,3 +17,5 @@ firebase_admin.initialize_app(cred,{'storageBucket': 'attendancecamera.appspot.c
 credentials = service_account.Credentials.from_service_account_file("backend\\attendancecamera-15e2e843f42e.json")
 storage.Client(credentials=credentials).bucket(firebase_admin.storage.bucket().name).blob('Screenshot (786).png').download_to_filename('backend/resources/Test.png')
 
+files = storage.Client(credentials=credentials).list_blobs(firebase_admin.storage.bucket().name)
+for i in files: print('The public url is ', i.public_url)
