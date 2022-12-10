@@ -51,10 +51,11 @@ def faceEncodings(img_list):
 
 known_encodings_lst = faceEncodings(images)
 # capture video
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
+# retrieval and the test of the image
+img = cv2.imread("backend\\test_image\Test.jpg")
 while True:
-    SUCCESS, img = cap.read()
 
     if not SUCCESS:
         break
@@ -79,7 +80,8 @@ while True:
             # call the function
             mark_attance_list(name)
 
-    cv2.imshow("Image", img)
-    cv2.waitKey(1)
+    # cv2.imshow("Image", img)
+    # cv2.waitKey(1)
+    break
 
-cap.release()
+# cap.release()
