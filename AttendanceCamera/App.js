@@ -52,8 +52,15 @@ export default function App() {
 	const savePicture = async () => {
 		if (image) {
 			try {
+
+				const response = await fetch(image)
+				const blob = await response.blob();
+				// const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
+				const filename = '1';
+				var ref = firebase.storage().ref().child(filename).put(blob);
+
 				const asset = await MediaLibrary.createAssetAsync(image);
-				alert("Picture saved successfully 🥳");
+				alert("Attendance Recorded 🥳");
 				setImage(null);
 				console.log('Picture saved successfully');
 			} catch (error) {
