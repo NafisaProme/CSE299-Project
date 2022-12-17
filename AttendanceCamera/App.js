@@ -52,7 +52,6 @@ export default function App() {
 	const savePicture = async () => {
 		if (image) {
 			try {
-
 				const response = await fetch(image)
 				const blob = await response.blob();
 				// const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
