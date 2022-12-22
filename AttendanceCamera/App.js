@@ -65,33 +65,10 @@ export default function App() {
 			} catch (error) {
 				console.log(error);
 			}
-
-			// const source = {uri: image}
-			// setImage(source);
-
 		}
 	};
 	
-	// const uploadImage = async () =>
-	// {
-	// 	console.log(image);
-	// 	const response = await fetch(image.uri);
-	// 	const blob = await response.blob();
-	// 	const filename = image.uri.substring(image.uri.lastIndexOf('/') + 1);
-	// 	var ref = firebase.storage().ref().child(filename).put(blob);
-
-	// 	try {
-	// 		await ref;
-	// 	}
-	// 	catch (error) {
-	// 		console.log(error);
-	// 	}
-	// 	Alert.alert(
-	// 		"Photo Uploaded"
-	// 		);
-	// 	setImage(null);
-	// }
-
+	
 	// checking for the camera permissions 
 	if (hasCameraPermission === false) {
 		return <Text>No access to camera</Text>;
@@ -153,7 +130,7 @@ export default function App() {
 							onPress={() => setImage(null)}
 							icon="retweet"
 						/>
-						<Button title="Save" onPress={savePicture} icon="check" />
+						<Button title="Give Attendance" onPress={savePicture} icon="check" />
 					</View>
 				) : (
 					<Button title="Click" onPress={takePicture} icon="camera" />

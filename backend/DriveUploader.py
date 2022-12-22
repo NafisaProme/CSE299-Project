@@ -3,7 +3,8 @@ import requests
 from datetime import datetime
 
 def upload_to_drive():
-    headers = {"Authorization": "Bearer ya29.a0AX9GBdWX7VoODy5l9gs_4sFIjQQRLJ1Ymg0gDyu7M7MhHAynwkhOB7Q6sQzqlRlPceg28EHJ3VEIvWiD04H7-bdWkE2pGuAJ7moutP8bmok2HuMNn3wX2cya9SEv6Uue7kzLs0kIXeyhVibXMONZzQ43Kl-0aCgYKARUSARMSFQHUCsbCHtbqy3ihfb-yR5bwvmsetA0163"}
+    # google playground api 
+    headers = {"Authorization": "Bearer ya29.a0AX9GBdUP9rGZFLo6ogF2rrqmkZAIMTJjV5t1oh-elntsNQwajY3DFP9qqyaAO-IuqHFiNVdSxPRPAk4Ox30sP4MqyCI5R0FjgJiK-yi4lr4QM-Rfzu2mRY22R2ybpcMmuxCZgTrobaOiWvkFyDBPkjmryzf5aCgYKAQkSARMSFQHUCsbC43_78UYEOT_-GztQ-sqnyg0163"}
     para = {
         "name": str(datetime.today().strftime("%d/%m/%Y")) + " " + str(datetime.now().strftime("%H:%M:%S")),
         "parents":["1yJiFzXpGRCYKsQZp3K8BS4LKPWnHvSOh"]
@@ -11,6 +12,7 @@ def upload_to_drive():
     files = {
         'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'), 'file': open("backend\\attendance.csv", "rb")
     }
+    # posting the csv file to google drive 
     r = requests.post(
         "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
         headers=headers,

@@ -24,7 +24,6 @@ def attendance():
         persons_names.append(person_name)
 
     # mark attendance
-
     def mark_attance_list(name):
         with open("backend/attendance.csv", "r+") as f:
             # get current data inside of the list
@@ -54,8 +53,6 @@ def attendance():
 
 
     known_encodings_lst = faceEncodings(images)
-    # capture video
-    # cap = cv2.VideoCapture(0)
 
     # retrieval and the test of the image
     img = cv2.imread("backend\\test_image\Test.jpg")
