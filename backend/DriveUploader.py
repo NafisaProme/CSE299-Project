@@ -13,11 +13,7 @@ def upload_to_drive():
     files = {
         'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'), 'file': open("backend\\attendance.csv", "rb")
     }
-<<<<<<< HEAD
     # posting the csv file to google drive 
-=======
-    #post request
->>>>>>> 9dc9865366b9393cb14c94566de330e6fbc9487b
     r = requests.post(
         "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
         headers=headers,
